@@ -16,9 +16,12 @@ class HomeScreen extends StatelessWidget {
             width: 200,
             height: 200,
             decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                        'assets/images/united-world-wrestling-logo.png'))),
+              image: DecorationImage(
+                image:
+                    AssetImage('assets/images/united-world-wrestling-logo.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           const Padding(
             padding: EdgeInsets.all(40.0),
