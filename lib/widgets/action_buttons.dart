@@ -7,71 +7,75 @@ class ActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _buildFloatingActionButton(IconData icon, Function onPressed) {
+      return FloatingActionButton(
+        child: Icon(icon),
+        onPressed: () => onPressed(),
+      );
+    }
+
     return BlocBuilder<TimerBloc, TimerState>(
       buildWhen: (prev, state) => prev.runtimeType != state.runtimeType,
       builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            if (state is TimerInitial) ...[
-              FloatingActionButton(
-                child: const Icon(Icons.play_arrow),
-                onPressed: () {
-                  context.read<TimerBloc>().add(
-                        TimerStarted(duration: state.duration),
-                      );
-                },
-              ),
-            ],
-            if (state is TimerRunInProgress) ...[
-              FloatingActionButton(
-                child: const Icon(Icons.pause),
-                onPressed: () {
-                  context.read<TimerBloc>().add(
-                        const TimerPaused(),
-                      );
-                },
-              ),
-              FloatingActionButton(
-                child: const Icon(Icons.replay),
-                onPressed: () {
-                  context.read<TimerBloc>().add(
-                        const TimerReset(),
-                      );
-                },
-              ),
-            ],
-            if (state is TimerRunPause) ...[
-              FloatingActionButton(
-                child: const Icon(Icons.play_arrow),
-                onPressed: () {
-                  context.read<TimerBloc>().add(
-                        const TimerResumed(),
-                      );
-                },
-              ),
-              FloatingActionButton(
-                child: const Icon(Icons.replay),
-                onPressed: () {
-                  context.read<TimerBloc>().add(
-                        const TimerReset(),
-                      );
-                },
-              ),
-            ],
-            if (state is TimerRunComplete) ...[
-              FloatingActionButton(
-                child: const Icon(Icons.replay),
-                onPressed: () {
-                  context.read<TimerBloc>().add(
-                        const TimerReset(),
-                      );
-                },
-              ),
-            ]
-          ],
-        );
+        return _buildTimerStates(state, _buildFloatingActionButton, context);
       },
+    );
+  }
+
+  _buildTimerStates(
+    TimerState state,
+    FloatingActionButton Function(IconData icon, Function onPressed)
+        _buildFloatingActionButton,
+    BuildContext context,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        if (state is TimerInitial) ...[
+          _buildFloatingActionButton(
+            Icons.play_arrow,
+            () => context.read<TimerBloc>().add(
+                  TimerStarted(duration: state.duration),
+                ),
+          ),
+        ],
+        if (state is TimerRunInProgress) ...[
+          _buildFloatingActionButton(
+            Icons.pause,
+            () => context.read<TimerBloc>().add(
+                  const TimerPaused(),
+                ),
+          ),
+          _buildFloatingActionButton(
+            Icons.replay,
+            () => context.read<TimerBloc>().add(
+                  const TimerReset(),
+                ),
+          ),
+        ],
+        if (state is TimerRunPause) ...[
+          _buildFloatingActionButton(
+            Icons.play_arrow,
+            () => context.read<TimerBloc>().add(
+                  const TimerResumed(),
+                ),
+          ),
+          _buildFloatingActionButton(
+            Icons.replay,
+            () => context.read<TimerBloc>().add(
+                  const TimerReset(),
+                ),
+          ),
+        ],
+        if (state is TimerRunComplete) ...[
+          _buildFloatingActionButton(
+            Icons.replay,
+            () => context.read<TimerBloc>().add(
+                  const TimerReset(),
+                ),
+          ),
+        ]
+      ],
     );
   }
 }
