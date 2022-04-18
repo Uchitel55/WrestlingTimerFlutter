@@ -7,7 +7,8 @@ class ActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _buildFloatingActionButton(IconData icon, Function onPressed) {
+    FloatingActionButton _buildFloatingActionButton(
+        IconData icon, Function onPressed) {
       return FloatingActionButton(
         child: Icon(icon),
         onPressed: () => onPressed(),
@@ -17,16 +18,20 @@ class ActionButtons extends StatelessWidget {
     return BlocBuilder<TimerBloc, TimerState>(
       buildWhen: (prev, state) => prev.runtimeType != state.runtimeType,
       builder: (context, state) {
-        return _buildTimerStates(state, _buildFloatingActionButton, context);
+        return _buildTimerStates(
+          context,
+          state,
+          _buildFloatingActionButton,
+        );
       },
     );
   }
 
-  _buildTimerStates(
+  Row _buildTimerStates(
+    BuildContext context,
     TimerState state,
     FloatingActionButton Function(IconData icon, Function onPressed)
         _buildFloatingActionButton,
-    BuildContext context,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
