@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/action_buttons.dart';
+import '../widgets/custom_buttons.dart';
 import '../widgets/timer_text.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.all(40.0),
             child: Center(child: TimerText()),
           ),
-          const ActionButtons(),
+          const TestFile(),
         ],
       ),
     );
