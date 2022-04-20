@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// ignore: implementation_imports
-import 'package:provider/src/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/timer_cubit.dart';
 
 class TimerText extends StatelessWidget {
