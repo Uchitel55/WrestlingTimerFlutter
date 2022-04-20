@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/timer_cubit.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/timer_text.dart';
 
@@ -7,14 +9,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int _duration =
+        context.select((TimerCubit bloc) => bloc.state.duration);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 200,
-            height: 200,
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: MediaQuery.of(context).size.height * 0.3,
+            alignment: Alignment.center,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image:
@@ -23,9 +28,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(40.0),
-            child: Center(child: TimerText()),
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Center(child: TimerText(duration: _duration)),
           ),
           const CustomButtons(),
         ],
