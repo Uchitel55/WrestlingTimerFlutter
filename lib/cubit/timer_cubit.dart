@@ -11,8 +11,9 @@ class TimerCubit extends Cubit<TimerState> {
 
   StreamSubscription<int>? _tickerSubscription;
 
-  TimerCubit(Ticker ticker)
-      : _ticker = ticker,
+  TimerCubit(
+    Ticker ticker,
+  )   : _ticker = ticker,
         super(const TimerState());
 
   @override
@@ -21,48 +22,44 @@ class TimerCubit extends Cubit<TimerState> {
     return super.close();
   }
 
-  void timerStarted(final int duration) {
-    emit(state.copyWith(
-      status: TimerStatus.runInProgress,
-      duration: state.duration,
-    ));
-    // _tickerSubscription?.cancel();
-    // _tickerSubscription = _ticker
-    //     .tick(
-    //       ticks: state.duration,
-    //     )
-    //     .listen(
-    //       (duration) => timerTicked(
-    //         state.duration,
-    //       ),
-    //     );
+  void timerStarted() {
+    _tickerSubscription?.cancel();
+
+    _tickerSubscription = _ticker
+        .tick(
+          ticks: state.duration,
+        )
+        .listen((duration) => duration > 0
+            ? emit(state.copyWith(
+                status: TimerStatus.runInProgress, duration: duration))
+            : emit(state.copyWith(status: TimerStatus.initial, duration: 180)));
   }
 
-  void timerPaused(final int duration) {
+  void timerPaused() {
+    _tickerSubscription?.pause();
     emit(
       state.copyWith(
         status: TimerStatus.runPause,
         duration: state.duration,
       ),
     );
-    // _tickerSubscription?.pause();
   }
 
-  void timerResumed(final int duration) {
+  void timerResumed() {
+    _tickerSubscription?.resume();
     emit(state.copyWith(
       status: TimerStatus.runInProgress,
       duration: state.duration,
     ));
   }
 
-  void timerReset(final int duration) {
+  void timerReset() {
+    _tickerSubscription?.cancel();
     emit(
       state.copyWith(
         status: TimerStatus.initial,
-        duration: state.duration,
+        duration: 180,
       ),
     );
   }
 }
-
-void timerTicked(final int duration) {}

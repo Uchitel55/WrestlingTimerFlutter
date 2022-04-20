@@ -2,19 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/timer_cubit.dart';
 
-class TestFile extends StatelessWidget {
-  const TestFile({Key? key}) : super(key: key);
+class CustomButtons extends StatelessWidget {
+  const CustomButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    FloatingActionButton _buildFloatingActionButton(
-        IconData icon, Function onPressed) {
-      return FloatingActionButton(
-        child: Icon(icon),
-        onPressed: () => onPressed(),
-      );
-    }
-
     return BlocBuilder<TimerCubit, TimerState>(
       builder: (context, state) {
         switch (state.status) {
@@ -38,14 +30,16 @@ class TestFile extends StatelessWidget {
               state,
               _buildFloatingActionButton,
             );
-          case TimerStatus.runComplete:
-            return _buildRunComplete(
-              context,
-              state,
-              _buildFloatingActionButton,
-            );
         }
       },
+    );
+  }
+
+  FloatingActionButton _buildFloatingActionButton(
+      IconData icon, Function onPressed) {
+    return FloatingActionButton(
+      child: Icon(icon),
+      onPressed: () => onPressed(),
     );
   }
 
@@ -57,7 +51,7 @@ class TestFile extends StatelessWidget {
   ) {
     return _buildFloatingActionButton(
       Icons.play_arrow,
-      () => context.read<TimerCubit>().timerStarted(state.duration),
+      () => context.read<TimerCubit>().timerStarted(),
     );
   }
 
@@ -72,11 +66,11 @@ class TestFile extends StatelessWidget {
       children: [
         _buildFloatingActionButton(
           Icons.pause,
-          () => context.read<TimerCubit>().timerPaused(state.duration),
+          () => context.read<TimerCubit>().timerPaused(),
         ),
         _buildFloatingActionButton(
           Icons.replay,
-          () => context.read<TimerCubit>().timerReset(state.duration),
+          () => context.read<TimerCubit>().timerReset(),
         ),
       ],
     );
@@ -93,25 +87,13 @@ class TestFile extends StatelessWidget {
       children: [
         _buildFloatingActionButton(
           Icons.play_arrow,
-          () => context.read<TimerCubit>().timerResumed(state.duration),
+          () => context.read<TimerCubit>().timerResumed(),
         ),
         _buildFloatingActionButton(
           Icons.replay,
-          () => context.read<TimerCubit>().timerReset(state.duration),
+          () => context.read<TimerCubit>().timerReset(),
         ),
       ],
-    );
-  }
-
-  FloatingActionButton _buildRunComplete(
-    BuildContext context,
-    TimerState state,
-    FloatingActionButton Function(IconData icon, Function onPressed)
-        _buildFloatingActionButton,
-  ) {
-    return _buildFloatingActionButton(
-      Icons.play_arrow,
-      () => context.read<TimerCubit>().timerPaused(state.duration),
     );
   }
 }

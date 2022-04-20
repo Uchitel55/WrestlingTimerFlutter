@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.all(40.0),
             child: Center(child: TimerText()),
           ),
-          const TestFile(),
+          const CustomButtons(),
         ],
       ),
     );

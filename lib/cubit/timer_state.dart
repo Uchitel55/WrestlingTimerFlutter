@@ -4,7 +4,6 @@ enum TimerStatus {
   initial,
   runPause,
   runInProgress,
-  runComplete,
 }
 
 class TimerState extends Equatable {
@@ -13,7 +12,7 @@ class TimerState extends Equatable {
 
   const TimerState({
     this.status = TimerStatus.initial,
-    this.duration = 80,
+    this.duration = 180,
   });
 
   @override
@@ -22,6 +21,7 @@ class TimerState extends Equatable {
   TimerState copyWith({
     TimerStatus? status,
     int? duration,
+    bool? timerStarted,
   }) {
     return TimerState(
       status: status ?? this.status,
