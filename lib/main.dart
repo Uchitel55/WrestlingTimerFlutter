@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:wrestling_timer/app.dart';
+import 'di/di.dart';
+import 'wrestling_timer_app.dart';
 
-void main() => runApp(const App());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
+  runApp(const WrestlingTimerApp());
+}
