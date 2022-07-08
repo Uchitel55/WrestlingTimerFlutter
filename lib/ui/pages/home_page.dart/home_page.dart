@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:wrestling_timer/resources/images_constants.dart';
+
+import '../../../resources/app_constants.dart';
+import '../../../resources/images_constants.dart';
 
 enum HomePageFields {
   work,
@@ -16,9 +18,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
-      appBar: AppBar(
+      drawer: const Drawer(
         backgroundColor: Colors.white,
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Color(0xFF04003F)),
+        elevation: 0,
       ),
       body: FormBuilder(
         key: _formKey,
@@ -35,7 +41,7 @@ class HomePage extends StatelessWidget {
                 child: const Icon(
                   Icons.play_arrow,
                   size: 80,
-                  color: Color(0xFF04003f),
+                  color: Color(0xFF04003F),
                 ),
               ),
             ),
@@ -50,7 +56,7 @@ class HomePage extends StatelessWidget {
                         isEmpty: true,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.play_arrow_outlined),
-                            labelText: 'Work',
+                            labelText: AppConstants.work,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),
                       );
@@ -60,14 +66,14 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FormBuilderField(
-                    name: HomePageFields.work.name,
+                    name: HomePageFields.rest.name,
                     builder: (FormFieldState<dynamic> state) {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
                             prefixIcon:
                                 const Icon(Icons.pause_circle_outline_outlined),
-                            labelText: 'Rest',
+                            labelText: AppConstants.rest,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),
                       );
@@ -77,13 +83,13 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FormBuilderField(
-                    name: HomePageFields.work.name,
+                    name: HomePageFields.rounds.name,
                     builder: (FormFieldState<dynamic> state) {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.rounded_corner),
-                            labelText: 'Rounds',
+                            labelText: AppConstants.rounds,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),
                       );
