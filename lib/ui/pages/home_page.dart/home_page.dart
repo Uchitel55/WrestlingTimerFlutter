@@ -35,8 +35,7 @@ class HomePage extends StatelessWidget {
                 child: const Icon(
                   Icons.play_arrow,
                   size: 80,
-                  // TODO: Change color like on LOGO.
-                  color: Colors.blue,
+                  color: Color(0xFF04003f),
                 ),
               ),
             ),
@@ -66,6 +65,8 @@ class HomePage extends StatelessWidget {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
+                            prefixIcon:
+                                const Icon(Icons.pause_circle_outline_outlined),
                             labelText: 'Rest',
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),
@@ -81,6 +82,7 @@ class HomePage extends StatelessWidget {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.rounded_corner),
                             labelText: 'Rounds',
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),

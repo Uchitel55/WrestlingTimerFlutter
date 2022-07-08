@@ -9,7 +9,7 @@ class WrestlingTimerApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wrestling Timer',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        colorScheme: const ColorScheme.light(primary: Color(0xFFF58220)),
       ),
       home: HomePage(),
     );
