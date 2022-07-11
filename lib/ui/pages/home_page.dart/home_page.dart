@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../../resources/app_constants.dart';
 import '../../../resources/images_constants.dart';
@@ -36,11 +37,14 @@ class HomePage extends StatelessWidget {
             _buildImage(context),
             Center(
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+                style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(16),
+                    alignment: Alignment.center),
                 onPressed: () {},
                 child: const Icon(
-                  Icons.play_arrow,
-                  size: 80,
+                  Icons.play_arrow_rounded,
+                  size: 60,
                   color: Color(0xFF04003F),
                 ),
               ),
@@ -53,12 +57,19 @@ class HomePage extends StatelessWidget {
                     name: HomePageFields.work.name,
                     builder: (FormFieldState<dynamic> state) {
                       return InputDecorator(
-                        isEmpty: true,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.play_arrow_outlined),
-                            labelText: AppConstants.work,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12))),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(UniconsLine.play_circle, size: 24),
+                            Text(
+                              AppConstants.work,
+                            )
+                          ],
+                        ),
                       );
                     },
                   ),
@@ -71,8 +82,7 @@ class HomePage extends StatelessWidget {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
-                            prefixIcon:
-                                const Icon(Icons.pause_circle_outline_outlined),
+                            prefixIcon: const Icon(UniconsLine.pause_circle),
                             labelText: AppConstants.rest,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),
@@ -88,7 +98,7 @@ class HomePage extends StatelessWidget {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.rounded_corner),
+                            prefixIcon: const Icon(UniconsLine.process),
                             labelText: AppConstants.rounds,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12))),
