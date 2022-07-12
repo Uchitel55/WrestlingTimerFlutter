@@ -17,6 +17,8 @@ class HomePage extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
+  //TODO: Separated build methods <40 lines
+  //TODO: String constants
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
@@ -41,6 +43,7 @@ class HomePage extends StatelessWidget {
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(16),
                     alignment: Alignment.center),
+                //TODO: Navigate to timer page
                 onPressed: () {},
                 child: const Icon(
                   Icons.play_arrow_rounded,
@@ -55,20 +58,48 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: FormBuilderField(
                     name: HomePageFields.work.name,
-                    builder: (FormFieldState<dynamic> state) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                    builder: (FormFieldState<dynamic> field) {
+                      return GestureDetector(
+                        onTap: () {
+                          //TODO: Move in reusable separate widget
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return const AlertDialog(
+                                title: Text('Enter Time'),
+                                //TODO: FormBuilderTextField
+                                content: Text(''),
+                              );
+                            },
+                          );
+                        },
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                        ),
-                        child: Row(
-                          children: const [
-                            Icon(UniconsLine.play_circle, size: 24),
-                            Text(
-                              AppConstants.work,
-                            )
-                          ],
+                          child: Row(
+                            children: const [
+                              Icon(UniconsLine.play_circle, size: 24),
+                              SizedBox(width: 8),
+                              Text(
+                                AppConstants.work,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                '03:00',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -78,14 +109,34 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: FormBuilderField(
                     name: HomePageFields.rest.name,
-                    builder: (FormFieldState<dynamic> state) {
+                    builder: (FormFieldState<dynamic> field) {
                       return InputDecorator(
-                        isEmpty: true,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(UniconsLine.pause_circle),
-                            labelText: AppConstants.rest,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12))),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(UniconsLine.pause_circle, size: 24),
+                            SizedBox(width: 8),
+                            Text(
+                              AppConstants.rest,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              '01:00',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     },
                   ),
@@ -94,14 +145,35 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: FormBuilderField(
                     name: HomePageFields.rounds.name,
-                    builder: (FormFieldState<dynamic> state) {
+                    builder: (FormFieldState<dynamic> field) {
                       return InputDecorator(
                         isEmpty: true,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(UniconsLine.process),
-                            labelText: AppConstants.rounds,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12))),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(UniconsLine.process, size: 24),
+                            SizedBox(width: 8),
+                            Text(
+                              AppConstants.rounds,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              '2',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     },
                   ),
