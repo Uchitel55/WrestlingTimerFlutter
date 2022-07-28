@@ -25,6 +25,7 @@ dependencies:
   flutter_form_builder: ^7.3.1
   unicons: ^2.1.0
   circular_countdown_timer: ^0.2.2
+  page_transition: ^2.0.9
   
 
 dev_dependencies:

@@ -7,18 +7,28 @@ class TimerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CircularCountDownTimer(
-        autoStart: false,
-        controller: CountDownController(),
-        isReverse: true,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        duration: 30,
-        fillColor: const Color(0xFF04003F),
-        ringColor: Colors.transparent,
-        backgroundColor: const Color(0xFFF58220),
-        textFormat: 'mm:ss',
-        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularCountDownTimer(
+            autoStart: false,
+            controller: CountDownController(),
+            isReverse: true,
+            width: 140,
+            height: 140,
+            duration: 30,
+            fillColor: const Color(0xFF04003F),
+            ringColor: Colors.transparent,
+            backgroundColor: const Color(0xFFF58220),
+            textFormat: 'mm:ss',
+            textStyle:
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+          ),
+          ElevatedButton(
+            onPressed: Navigator.of(context).pop,
+            child: const Text('Cancel'),
+          )
+        ],
       ),
     );
   }
