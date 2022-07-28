@@ -4,6 +4,7 @@ import 'package:unicons/unicons.dart';
 
 import '../../../resources/app_constants.dart';
 import '../../../resources/images_constants.dart';
+import '../../../routes.dart';
 
 enum HomePageFields {
   work,
@@ -44,7 +45,9 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     alignment: Alignment.center),
                 //TODO: Navigate to timer page
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(Routes.timer);
+                },
                 child: const Icon(
                   Icons.play_arrow_rounded,
                   size: 60,
@@ -155,7 +158,7 @@ class HomePage extends StatelessWidget {
                         ),
                         child: Row(
                           children: const [
-                            Icon(UniconsLine.process, size: 24),
+                            Icon(Icons.replay_5_rounded, size: 24),
                             SizedBox(width: 8),
                             Text(
                               AppConstants.rounds,
